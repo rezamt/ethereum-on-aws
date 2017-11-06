@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+#
+# start a geth instance for mining
+#
+
+geth --identity "{{ ansible_hostname }}" \
+	--datadir {{ geth.data_dir }} \
+	--port {{ geth.p2p_port }}\
+	--nodiscover \
+	--ipcpath {{ geth.data_dir }}/aws-chain.ipc \
+	--rpcapi "admin,db,eth,debug,miner,net,shh,txpool,personal,web3" \
+	--autodag \
+	--networkid {{ geth.network_id }} \
+	--nat "none" \
+	--etherbase {{ geth_etherbase }} \
+	--mine \
+	$*
